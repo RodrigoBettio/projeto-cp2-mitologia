@@ -29,9 +29,10 @@
 4. [Diagrama de Classes (UML)](#-diagrama-de-classes-uml)
 5. [Panteão de Heróis e Bestiário de Monstros](#-panteão-de-heróis-e-bestiário-de-monstros)
 6. [Mecânicas de Combate (1v1 e 3v3)](#-mecânicas-de-combate-1v1-e-3v3)
-7. [Como Executar o Projeto](#-como-executar-o-projeto)
-8. [Suíte de Testes Automatizada de POO](#-suíte-de-testes-automatizada-de-poo)
-9. [Passo a Passo para Subir no GitHub](#-passo-a-passo-para-subir-no-github)
+7. [Destaques de UI/UX e Terminal Retro](#-destaques-de-uiux-e-terminal-retro)
+8. [Como Executar o Projeto](#-como-executar-o-projeto)
+9. [Suíte de Testes Automatizada de POO](#-suíte-de-testes-automatizada-de-poo)
+10. [Passo a Passo para Subir no GitHub](#-passo-a-passo-para-subir-no-github)
 
 ---
 
@@ -42,7 +43,8 @@ O projeto **Arena das Mitologias** coloca frente a frente os maiores heróis de 
 Desenvolvido em **Python puro** (sem dependências externas), o sistema conta com:
 - **Modos de Combate Duplo**: Batalhas 1v1 rápidas e Guerras em Equipe 3v3 épicas.
 - **Jogabilidade Híbrida**: Permite tanto **batalha interativa** (o jogador escolhe as ações e alvos pelo teclado) quanto **simulação automática narrada** (ideal para demonstrações dinâmicas e testes rápidos).
-- **Suíte de Auto-Verificação**: Um comando embutido (`--test`) que valida programaticamente se todos os requisitos da CP2 estão 100% cumpridos.
+- **Flexibilidade Total de Instanciação**: Todas as classes aceitam parâmetros customizados ou valores balanceados padrão.
+- **Suíte de Auto-Verificação**: Um comando embutido (`python main.py --test`) que valida programaticamente se todos os requisitos da CP2 estão 100% cumpridos.
 
 ---
 
@@ -52,27 +54,27 @@ Desenvolvido em **Python puro** (sem dependências externas), o sistema conta co
 | :--- | :---: | :--- |
 | **Trabalho em grupo com nomes/RMs no README** | ✅ Atendido | Identificação completa dos 5 integrantes na introdução e cabeçalho do código. |
 | **7 Atributos obrigatórios na classe base:** `hp`, `mp`, `speed`, `atk`, `matk`, `defense`, `mdefense` | ✅ Atendido | Definidos na classe base `EntidadeCombate` e herdados integralmente por `Personagem` e `Monstro`. |
-| **Classe pai chamada "Personagem"** | ✅ Atendido | Classe `Personagem(EntidadeCombate)` implementada na Seção 1. |
-| **Classe pai chamada "Monstro"** | ✅ Atendido | Classe `Monstro(EntidadeCombate)` implementada na Seção 1. |
+| **Classe pai chamada "Personagem"** | ✅ Atendido | Classe `Personagem` implementada na Seção 1 (100% instanciável diretamente ou por herança). |
+| **Classe pai chamada "Monstro"** | ✅ Atendido | Classe `Monstro` implementada na Seção 1 (100% instanciável diretamente ou por herança). |
 | **Classes obrigatórias filhas:** `Guerreiro` e `Mago` herdando de `Personagem` | ✅ Atendido | `Guerreiro(Personagem)` e `Mago(Personagem)` implementados na Seção 2. |
 | **Classe jogável inédita** além de Guerreiro e Mago | ✅ Superado | **4 classes inéditas criadas**: `Arqueiro`, `Paladino`, `Assassino` e `Necromante` (totalizando 6 classes). |
-| **Instanciação de objetos** de `Monstro` e das classes filhas | ✅ Atendido | Instanciação em `criar_elenco_herois()`, `criar_elenco_monstros()` e nos modos de jogo. |
-| **Sistema de Batalha 1v1** com velocidade decidindo iniciativa e cálculo de dano | ✅ Atendido | Função `simular_combate_1v1()`: compara `speed`, calcula `atk - defense` ou `matk - mdefense`. |
-| **Sistema de Batalha 3v3** com seleção de alvos e checagem de fim | ✅ Atendido | Função `simular_combate_3v3()`: fila dinâmica por iniciativa, seleção de alvos vivos e parada com `hp <= 0`. |
+| **Instanciação de objetos** de `Monstro` e das classes filhas | ✅ Atendido | Instanciação flexível com valores default ou argumentos posicionais/nomeados completos. |
+| **Sistema de Batalha 1v1** com velocidade decidindo iniciativa e cálculo de dano | ✅ Atendido | Funções `simular_combate_1v1()` / `batalha_1v1()`: compara `speed`, calcula `atk - defense` ou `matk - mdefense`. |
+| **Sistema de Batalha 3v3** com seleção de alvos e checagem de fim | ✅ Atendido | Funções `simular_combate_3v3()` / `batalha_3v3()`: fila dinâmica por iniciativa, seleção de alvos vivos e parada com `hp <= 0`. |
 | **Conceitos de POO avaliados** (Classes, Objetos, Atributos, Métodos, Herança, Polimorfismo) | ✅ Atendido | 100% em conformidade com tipagem estática (`typing`), docstrings e suíte de testes. |
 | **Repositório GitHub e README com excelência** | ✅ Atendido | Repositório estruturado, guia passo a passo e documentação técnica aprofundada. |
-| **Criatividade** | ✅ Superado | Tema mitológico global, barras de status dinâmicas em ASCII, IA para monstros e habilidades especiais com consumo de MP. |
+| **Criatividade** | ✅ Superado | Tema mitológico global, barras de status dinâmicas em cores ANSI, IA para monstros e habilidades especiais com consumo de MP. |
 
 ---
 
 ## 🧬 Pilares de POO Aplicados
 
 ### 1. Abstração
-- A classe abstrata `EntidadeCombate(ABC)` define o modelo universal de um combatente, obrigando qualquer classe derivada a implementar os métodos de ação (`atacar` e `habilidade_especial`).
-- O usuário do sistema interage com métodos intuitivos (`esta_vivo()`, `receber_dano()`, `atacar()`) sem precisar manipular ponteiros ou regras internas de vida negativa.
+- A classe abstrata `EntidadeCombate(ABC)` define o modelo universal de um combatente, estabelecendo as propriedades comuns e o contrato de ação (`atacar` e `habilidade_especial`).
+- Classes concretas `Personagem` e `Monstro` implementam o comportamento base para que possam ser utilizadas tanto diretamente quanto como mães de subclasses especializadas.
 
 ### 2. Encapsulamento
-- O atributo de vida (`_hp`) e mana (`_mp`) são protegidos e expostos através de `@property` e `@hp.setter`.
+- O atributo de vida (`_hp`) e mana (`_mp`) são protegidos e expostos através de `@property` e setters validados.
 - O setter garante que a vida nunca fique menor que `0` e nunca ultrapasse o valor máximo (`max_hp`), mantendo o estado da entidade sempre consistente.
 
 ```python
@@ -86,9 +88,9 @@ def hp(self, valor: int) -> None:
 ```
 
 ### 3. Herança
-- `Personagem` herda de `EntidadeCombate`, agregando atributos temáticos de heróis como `classe_nome`, `mitologia` e regeneração de mana por turno.
+- `Personagem` herda de `EntidadeCombate`, agregando atributos temáticos de heróis como `classe_nome`, `mitologia` e regeneração de mana por rodada.
 - As classes `Guerreiro`, `Mago`, `Arqueiro`, `Paladino`, `Assassino` e `Necromante` herdam diretamente de `Personagem`.
-- `Monstro` herda de `EntidadeCombate`, e classes como `Minotauro`, `Cerbero`, `Medusa`, etc., herdam de `Monstro`.
+- `Monstro` herda de `EntidadeCombate`, e classes como `Minotauro`, `Cerbero`, `Medusa`, `Quimera`, `Kraken` e `Esfinge` herdam de `Monstro`.
 
 ```
 EntidadeCombate (ABC)
@@ -111,12 +113,12 @@ EntidadeCombate (ABC)
 ### 4. Polimorfismo
 - O método `atacar(alvo)` foi sobrescrito em **todas** as classes com comportamentos, cálculos e narrativas personalizadas:
   - **Guerreiro**: Aplica dano físico marcial com escudo e lança (`self.atk - alvo.defense`).
-  - **Mago**: Projeta magia arcana pura (`self.matk - alvo.mdefense`).
-  - **Arqueiro**: Realiza disparos à distância com penetração de 25% da armadura inimiga.
+  - **Mago**: Projeta magia arcana cósmica (`self.matk - alvo.mdefense`).
+  - **Arqueiro**: Realiza disparos de prata à distância mitigando 25% da armadura inimiga.
   - **Paladino**: Realiza ataque híbrido sagrado (combina dano físico e divino).
   - **Assassino**: Possui chance de 35% de desferir golpe crítico letal com dano multiplicado.
-  - **Necromante**: Drena 35% do dano causado de volta para recuperar seus próprios pontos de vida.
-- O mesmo polimorfismo se aplica ao método `habilidade_especial(alvo)`, que consome MP para liberar golpes mitológicos épicos.
+  - **Necromante**: Drena 35% do dano causado de volta para recuperar seus próprios pontos de vida (vampirismo).
+- O mesmo polimorfismo se aplica ao método `habilidade_especial(alvo)`, que consome MP para liberar técnicas épicas.
 
 ---
 
@@ -153,11 +155,15 @@ classDiagram
         +str classe_nome
         +str mitologia
         +regenerar_turno() void
+        +atacar(alvo) Tuple
+        +habilidade_especial(alvo) Tuple
     }
 
     class Monstro {
         +str origem
         +str descricao
+        +atacar(alvo) Tuple
+        +habilidade_especial(alvo) Tuple
         +agir_ia(alvos_vivos) Tuple
     }
 
@@ -229,23 +235,23 @@ classDiagram
 
 | Herói / Classe | Mitologia | HP | MP | SPD | ATK | MATK | DEF | MDEF | Habilidade Especial |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **Guerreiro** (*Aquiles*) | Grega | 140 | 30 | 12 | 28 | 6 | 16 | 8 | *Fúria de Ares* (Ignora 40% da DEF) |
-| **Mago** (*Merlin*) | Arturiana | 90 | 90 | 14 | 8 | 32 | 7 | 18 | *Meteoro de Avalon* (1.7x MATK) |
-| **Arqueiro** (*Atalanta*) | Grega | 105 | 45 | 22 | 26 | 10 | 10 | 11 | *Disparo Lunar* (Perfuração Estelar) |
-| **Paladino** (*Brunhilda*) | Nórdica | 130 | 50 | 15 | 22 | 18 | 14 | 14 | *Julgamento Divino* (Dano + Auto-Cura) |
-| **Assassino** (*Hanzo*) | Japonesa | 100 | 40 | 25 | 29 | 12 | 9 | 9 | *Execução de Susanoo* (Crítico Letal) |
-| **Necromante** (*Nefértis*) | Egípcia | 95 | 80 | 13 | 10 | 30 | 8 | 17 | *Balança de Anúbis* (Necrose + Vampirismo) |
+| **Guerreiro** (*Aquiles*) | Grega | 145 | 30 | 12 | 28 | 6 | 17 | 8 | *Fúria de Ares* (Ignora 40% da DEF) |
+| **Mago** (*Merlin*) | Arturiana | 90 | 90 | 14 | 8 | 33 | 7 | 18 | *Meteoro de Avalon* (1.7x MATK) |
+| **Arqueiro** (*Atalanta*) | Grega | 105 | 45 | 22 | 27 | 10 | 10 | 11 | *Disparo Lunar* (Perfuração Estelar) |
+| **Paladino** (*Brunhilda*) | Nórdica | 135 | 50 | 15 | 22 | 18 | 14 | 14 | *Julgamento Divino* (Dano + Auto-Cura) |
+| **Assassino** (*Hanzo*) | Japonesa | 100 | 40 | 25 | 30 | 12 | 9 | 9 | *Execução de Susanoo* (Crítico Letal) |
+| **Necromante** (*Nefértis*) | Egípcia | 95 | 80 | 13 | 10 | 31 | 8 | 17 | *Balança de Anúbis* (Necrose + Vampirismo) |
 
 ### Bestiário das Feras (Subclasses de `Monstro`)
 
 | Monstro | Origem | HP | MP | SPD | ATK | MATK | DEF | MDEF | Ataque Monstruoso |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
-| **Minotauro** | Grega (Creta) | 160 | 20 | 10 | 30 | 5 | 15 | 6 | Machado Duplo e Investida Demolidora |
+| **Minotauro** | Grega (Creta) | 165 | 20 | 10 | 31 | 5 | 15 | 6 | Machado Duplo e Investida Demolidora |
 | **Cérbero** | Grega (Hades) | 135 | 35 | 18 | 26 | 15 | 12 | 12 | Mordida Tríplice Flamejante |
-| **Medusa** | Grega | 110 | 70 | 16 | 12 | 31 | 10 | 16 | Olhar Petrificante (Dano Mágico) |
+| **Medusa** | Grega | 110 | 70 | 16 | 12 | 32 | 10 | 16 | Olhar Petrificante (Dano Mágico) |
 | **Quimera** | Clássica | 125 | 40 | 15 | 24 | 20 | 11 | 11 | Garras, Picada Tóxica e Baforada |
 | **Kraken** | Nórdica | 175 | 30 | 9 | 27 | 16 | 16 | 10 | Impacto de Tentáculos e Tsunami |
-| **Esfinge** | Egípcia | 120 | 60 | 13 | 18 | 28 | 13 | 18 | Enigma Mental e Maldição das Areias |
+| **Esfinge** | Egípcia | 120 | 60 | 13 | 18 | 29 | 13 | 18 | Enigma Mental e Maldição das Areias |
 
 ---
 
@@ -267,10 +273,19 @@ classDiagram
 ### 3. Batalha em Equipe 3v3
 1. **Fila Dinâmica de Ações**: Todos os combatentes vivos dos dois times são enfileirados em ordem decrescente de `speed`.
 2. **Gerenciamento Inteligente de Alvos**:
-   - Golpes só podem ser direcionados a inimigos com `hp > 0`.
+   - Golpes só podem ser direcionados a inimigos vivos com `hp > 0`.
    - Se um combatente for derrotado antes de sua vez na mesma rodada, ele perde a ação.
    - Monstros utilizam IA tática para focar no herói mais enfraquecido.
 3. **Condição de Término**: O combate finaliza quando **todos os membros** de um dos times tiverem `hp <= 0`.
+
+---
+
+## 🎨 Destaques de UI/UX e Terminal Retro
+
+- **Paleta de Cores ANSI**: Barras de vida em verde gradiente, mana em azul celeste, alertas de dano em vermelho e críticos em dourado.
+- **Barras Dinâmicas de Status**: Feedback visual imediato com caracteres alinhados proporcionalmente.
+- **Tabela Comparativa Integrada**: Opção `[5]` no menu exibe todos os combatentes organizados em grade tabular limpa.
+- **Validação de Entrada Robusta**: Menus com checagem de erros prevenindo travamentos caso o usuário digite letras ou números fora do intervalo.
 
 ---
 
@@ -294,19 +309,20 @@ O projeto foi construído utilizando **exclusivamente a biblioteca padrão do Py
    python main.py
    ```
 
-3. **Menu Interativo**:
+3. **Menu Principal**:
    ```text
-   =====================================================================
-       ARENA DAS MITOLOGIAS - SISTEMA DE BATALHA RPG POO (CP2)
-   =====================================================================
+  ╔═══════════════════════════════════════════════════════════════════════╗
+  ║         🏛️   ARENA DAS MITOLOGIAS - SISTEMA DE RPG POO   🐉           ║
+  ║                     CHECKPOINT 2 (CP2) - PYTHON                       ║
+  ╚═══════════════════════════════════════════════════════════════════════╝
    MENU PRINCIPAL:
-    [1] Duelo 1v1 Interativo (Voce controla o Heroi)
-    [2] Duelo 1v1 Simulacao Rapida (Execucao automatica narrada)
-    [3] Batalha em Equipe 3v3 Interativa (Comande o trio de Herois)
-    [4] Batalha em Equipe 3v3 Simulacao Automatica (Guerra mitologica completa)
-    [5] Bestiario e Panteao (Ver atributos de todos os personagens e monstros)
-    [6] Executar Testes Automatizados de POO (Verificacao dos Requisitos da CP2)
-    [0] Sair do Jogo
+     [1] Duelo 1v1 Interativo (Você controla o Herói)
+     [2] Duelo 1v1 Simulação Rápida (Execução automática narrada)
+     [3] Batalha em Equipe 3v3 Interativa (Comande o trio de Heróis)
+     [4] Batalha em Equipe 3v3 Simulação Automática (Guerra épica narrada)
+     [5] Bestiário e Panteão (Tabela comparativa de atributos)
+     [6] Executar Testes Automatizados de POO (Verificação dos Requisitos da CP2)
+     [0] Sair do Jogo
    ```
 
 ---
@@ -322,14 +338,14 @@ python main.py --test
 ### O que o teste valida:
 1. **Teste 1**: Presença obrigatória dos 7 atributos (`hp`, `mp`, `speed`, `atk`, `matk`, `defense`, `mdefense`) em todas as 6 classes de heróis.
 2. **Teste 2**: Presença obrigatória dos 7 atributos em todas as 6 classes de monstros.
-3. **Teste 3**: Verificação estrita de herança (`isinstance`) com `Personagem` e `Monstro`.
+3. **Teste 3**: Verificação estrita de herança (`isinstance`) com `Personagem` e `Monstro`, além da validação de instanciação direta.
 4. **Teste 4**: Verificação do Polimorfismo, executando o método `atacar()` em cada subclasse e validando saídas distintas.
 5. **Teste 5**: Execução determinística de um combate 1v1 completo até a vitória.
 6. **Teste 6**: Execução determinística de uma batalha 3v3 completa com checagem de fim.
 
 Resultado esperado:
 ```text
-[SUCESSO TOTAL] TODOS OS REQUISITOS DA CP2 PASSARAM COM NOTA 10!
+🎉 [SUCESSO TOTAL] TODOS OS REQUISITOS DA CP2 PASSARAM COM NOTA 10! 🎉
 ```
 
 ---
@@ -346,10 +362,6 @@ Quando estiver pronto para enviar o trabalho para o seu repositório do GitHub:
 
 2. **No terminal dentro da pasta do projeto, execute os comandos**:
    ```bash
-   git init
-   git add .
-   git commit -m "feat: implementacao completa do sistema de batalha RPG POO (CP2)"
-   git branch -M main
    git remote add origin https://github.com/SEU-USUARIO/rpg-mitologia-cp2.git
    git push -u origin main
    ```
